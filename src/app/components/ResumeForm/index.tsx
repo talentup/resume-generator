@@ -14,6 +14,7 @@ import { SkillsForm } from "components/ResumeForm/SkillsForm";
 import { ThemeForm } from "components/ResumeForm/ThemeForm";
 import { CustomForm } from "components/ResumeForm/CustomForm";
 import { FlexboxSpacer } from "components/FlexboxSpacer";
+import { ResumeDropzone } from "../ResumeDropzone";
 import { cx } from "lib/cx";
 
 const formTypeToComponent: { [type in ShowForm]: () => JSX.Element } = {
@@ -41,6 +42,10 @@ export const ResumeForm = () => {
       onMouseLeave={() => setIsHover(false)}
     >
       <section className="flex max-w-2xl flex-col gap-8 p-[var(--resume-padding)]">
+        <ResumeDropzone
+            isUsedInResumeGenerator={true}
+            onFileUrlChange={(url) => {}}
+        />
         <ProfileForm />
         {formsOrder.map((form) => {
           const Component = formTypeToComponent[form];

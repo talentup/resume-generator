@@ -23,10 +23,12 @@ export const ResumeDropzone = ({
   onFileUrlChange,
   className,
   playgroundView = false,
+  isUsedInResumeGenerator = false,
 }: {
   onFileUrlChange: (fileUrl: string) => void;
   className?: string;
   playgroundView?: boolean;
+  isUsedInResumeGenerator?: boolean;
 }) => {
   const [file, setFile] = useState(defaultFileState);
   const [isHoveredOnDropzone, setIsHoveredOnDropzone] = useState(false);
@@ -91,7 +93,7 @@ export const ResumeDropzone = ({
     }
 
     saveStateToLocalStorage({ resume, settings });
-    router.push("/resume-builder");
+    !isUsedInResumeGenerator ? router.push("/") : window.location.reload();
   };
 
   return (

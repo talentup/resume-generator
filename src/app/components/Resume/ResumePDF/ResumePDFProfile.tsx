@@ -32,7 +32,6 @@ export const ResumePDFProfile = ({
       >
         {name}
       </ResumePDFText>
-      {summary && <ResumePDFText>{summary}</ResumePDFText>}
       <View
         style={{
           ...styles.flexRowBetween,
@@ -95,6 +94,7 @@ export const ResumePDFProfile = ({
           );
         })}
       </View>
+       {summary && <ResumePDFText>{summary}</ResumePDFText>}
     </ResumePDFSection>
   );
 };

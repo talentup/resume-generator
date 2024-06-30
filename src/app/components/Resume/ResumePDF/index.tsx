@@ -10,6 +10,7 @@ import { DEFAULT_FONT_COLOR } from "lib/redux/settingsSlice";
 import type { Settings, ShowForm } from "lib/redux/settingsSlice";
 import type { Resume } from "lib/redux/types";
 import { SuppressResumePDFErrorMessage } from "components/Resume/ResumePDF/common/SuppressResumePDFErrorMessage";
+import {LogoSvg, LogoSvgPdf} from "components/logo/Logo";
 
 /**
  * Note: ResumePDF is supposed to be rendered inside PDFViewer. However,
@@ -94,7 +95,7 @@ export const ResumePDF = ({
 
   return (
     <>
-      <Document title={`${name} Resume`} author={name} producer={"OpenResume"}>
+      <Document title={`${name} Resume`} author={name} producer={"ResumeGenerator"}>
         <Page
           size={documentSize === "A4" ? "A4" : "LETTER"}
           style={{
@@ -103,15 +104,22 @@ export const ResumePDF = ({
             fontFamily,
             fontSize: fontSize + "pt",
           }}
+          
         >
           {Boolean(settings.themeColor) && (
             <View
               style={{
                 width: spacing["full"],
-                height: spacing[3.5],
-                backgroundColor: themeColor,
+                height: spacing[24],
+                padding: spacing[6],
+                paddingLeft: spacing["left"],
+                paddingBottom: spacing[0]
+                
               }}
-            />
+              fixed
+            >
+              {isPDF ? <LogoSvgPdf /> : <LogoSvg/>}
+          </View>
           )}
           <View
             style={{

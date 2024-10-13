@@ -5,11 +5,17 @@ export interface ResumeProfile {
   url: string;
   summary: string;
   location: string;
+  title: string;
 }
 
 export interface ResumeWorkExperience {
   company: string;
   jobTitle: string;
+  date: string;
+  descriptions: string[];
+}
+export interface ResumeCertification {
+  certTitle: string;
   date: string;
   descriptions: string[];
 }
@@ -48,7 +54,9 @@ export interface Resume {
   educations: ResumeEducation[];
   projects: ResumeProject[];
   skills: ResumeSkills;
+  certification: ResumeCertification[]
   custom: ResumeCustom;
+  title: String;
 }
 
 export type ResumeKey = keyof Resume;

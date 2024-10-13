@@ -38,7 +38,8 @@ export const spacing = {
   80: "240pt",
   96: "288pt",
   full: "100%",
-  left: "70%"
+  left: "70%",
+  center: "35%"
 } as const;
 
 export const styles = StyleSheet.create({

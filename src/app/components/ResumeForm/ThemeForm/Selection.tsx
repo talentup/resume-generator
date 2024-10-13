@@ -161,3 +161,31 @@ export const DocumentSizeSelections = ({
     </SelectionsWrapper>
   );
 };
+
+export const IsAmbassadorSelections = ({
+  isAmbassador,
+  themeColor,
+  handleSettingsChange,
+}: {
+  themeColor: string;
+  isAmbassador: boolean;
+  handleSettingsChange: (field: GeneralSetting, value: string) => void;
+}) => {
+  return (
+    <SelectionsWrapper>
+      <Selection
+        selectedColor={themeColor}
+        isSelected={isAmbassador}
+        onClick={() => handleSettingsChange("brandAmbassador", isAmbassador ? "": "true")}
+      >
+        <div className="flex flex-col items-center">
+          <div> TUA</div>
+          <div className="text-xs">
+            Ambassador
+          </div>
+        </div>
+      </Selection>
+
+    </SelectionsWrapper>
+  );
+};

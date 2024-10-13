@@ -6,6 +6,10 @@
 @font-face {font-family: "Lato"; src: url("/fonts/Lato-Bold.ttf"); font-weight: bold;}
 @font-face {font-family: "Montserrat"; src: url("/fonts/Montserrat-Regular.ttf");}
 @font-face {font-family: "Montserrat"; src: url("/fonts/Montserrat-Bold.ttf"); font-weight: bold;}
+@font-face {font-family: "Calibri"; src: url("/fonts/Calibri-Regular.ttf");}
+@font-face {font-family: "Calibri"; src: url("/fonts/Calibri-bold.ttf"); font-weight: bold;}
+@font-face {font-family: "Calibri"; src: url("/fonts/Calibri-italic.ttf"); font-style: italic;}
+@font-face {font-family: "Calibri"; src: url("/fonts/Calibri-bold-italic.ttf"); font-weight: bold; font-style: italic;}
 @font-face {font-family: "OpenSans"; src: url("/fonts/OpenSans-Regular.ttf");}
 @font-face {font-family: "OpenSans"; src: url("/fonts/OpenSans-Bold.ttf"); font-weight: bold;}
 @font-face {font-family: "Raleway"; src: url("/fonts/Raleway-Regular.ttf");}

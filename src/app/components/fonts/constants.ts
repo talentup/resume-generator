@@ -33,6 +33,7 @@ const SANS_SERIF_ENGLISH_FONT_FAMILIES = [
   "Montserrat",
   "OpenSans",
   "Raleway",
+  "Calibri"
 ] as const;
 
 const SERIF_ENGLISH_FONT_FAMILIES = [
@@ -67,6 +68,7 @@ export const FONT_FAMILY_TO_STANDARD_SIZE_IN_PT: Record<FontFamily, number> = {
   Montserrat: 10,
   OpenSans: 10,
   Raleway: 10,
+  Calibri: 11,
   // Serif Fonts
   Caladea: 11,
   Lora: 11,
@@ -84,6 +86,7 @@ export const FONT_FAMILY_TO_DISPLAY_NAME: Record<FontFamily, string> = {
   Montserrat: "Montserrat",
   OpenSans: "Open Sans",
   Raleway: "Raleway",
+  Calibri: "Calibri",
   // Serif Fonts
   Caladea: "Caladea",
   Lora: "Lora",

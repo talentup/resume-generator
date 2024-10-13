@@ -6,18 +6,22 @@ export interface Settings {
   fontFamily: string;
   fontSize: string;
   documentSize: string;
+  brandAmbassador: string;
   formToShow: {
     workExperiences: boolean;
     educations: boolean;
     projects: boolean;
     skills: boolean;
+    certification: boolean,
     custom: boolean;
   };
   formToHeading: {
     workExperiences: string;
     educations: string;
     projects: string;
+    qualifications: string;
     skills: string;
+    certification: string,
     custom: string;
   };
   formsOrder: ShowForm[];
@@ -37,7 +41,7 @@ export type GeneralSetting = Exclude<
 >;
 
 export const DEFAULT_THEME_COLOR = "#3885F7"; // cc-blue
-export const DEFAULT_FONT_FAMILY = "Roboto";
+export const DEFAULT_FONT_FAMILY = "Calibri";
 export const DEFAULT_FONT_SIZE = "11"; // text-base https://tailwindcss.com/docs/font-size
 export const DEFAULT_FONT_COLOR = "#171717"; // text-neutral-800
 
@@ -46,21 +50,26 @@ export const initialSettings: Settings = {
   fontFamily: DEFAULT_FONT_FAMILY,
   fontSize: DEFAULT_FONT_SIZE,
   documentSize: "Letter",
+  brandAmbassador: "",
   formToShow: {
     workExperiences: true,
     educations: true,
-    projects: true,
+    projects: false,
     skills: true,
+    qualifications: true,
+    certification: true,
     custom: false,
   },
   formToHeading: {
     workExperiences: "WORK EXPERIENCE",
     educations: "EDUCATION",
     projects: "PROJECT",
+    qualifications: "QUALIFICATIONS",
     skills: "SKILLS",
+    certification: "CERTIFICATIONS",
     custom: "CUSTOM SECTION",
   },
-  formsOrder: ["workExperiences", "educations", "projects", "skills", "custom"],
+  formsOrder: ["qualifications","skills", "certification", "educations", "workExperiences", "projects", "custom"],
   showBulletPoints: {
     educations: true,
     projects: true,

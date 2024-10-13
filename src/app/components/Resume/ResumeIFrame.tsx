@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, useRef, useEffect, useState } from "react";
 import Frame from "react-frame-component";
 import {
   A4_HEIGHT_PX,
@@ -77,13 +77,39 @@ const ResumeIframe = ({
     );
   }
   const width = isA4 ? A4_WIDTH_PX : LETTER_WIDTH_PX;
-  const height = isA4 ? A4_HEIGHT_PX : LETTER_HEIGHT_PX;
+  const theight = isA4 ? A4_HEIGHT_PX : LETTER_HEIGHT_PX;
+
+  const [height, setHeight] = useState(theight); // Initial height of the div/iframe
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const adjustHeight = () => {
+      if (contentRef.current) {
+        // Get the scrollHeight of the content
+        const contentHeight = contentRef.current.scrollHeight;
+        // Adjust the height if content overflows
+        if (contentHeight < theight) {
+          setHeight(theight * 2);
+        }
+      }
+    };
+
+    // Call adjustHeight initially and whenever the content changes
+    adjustHeight();
+    // Optionally add a listener for resizing the window to re-check the height
+    window.addEventListener('resize', adjustHeight);
+
+    // Cleanup the event listener on component unmount
+    return () => window.removeEventListener('resize', adjustHeight);
+  }, [height]);
 
   return (
     <div
+      ref={contentRef}
       style={{
         maxWidth: `${width * scale}px`,
         maxHeight: `${height * scale}px`,
+      
       }}
     >
       {/* There is an outer div and an inner div here. The inner div sets the iframe width and uses transform scale to zoom in/out the resume iframe.
@@ -94,6 +120,7 @@ const ResumeIframe = ({
           width: `${width}px`,
           height: `${height}px`,
           transform: `scale(${scale})`,
+          overflow: 'auto',
         }}
         className={`origin-top-left bg-white shadow-lg`}
       >

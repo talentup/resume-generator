@@ -44,6 +44,7 @@ export const groupLinesIntoSections = (lines: Lines) => {
 const SECTION_TITLE_PRIMARY_KEYWORDS = [
   "experience",
   "education",
+  "certification",
   "project",
   "skill",
 ];

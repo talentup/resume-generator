@@ -82,6 +82,7 @@ export const ResumeDropzone = ({
       const sections = Object.keys(settings.formToShow) as ShowForm[];
       const sectionToFormToShow: Record<ShowForm, boolean> = {
         workExperiences: resume.workExperiences.length > 0,
+        certification: resume.certification?.length > 0,
         educations: resume.educations.length > 0,
         projects: resume.projects.length > 0,
         skills: resume.skills.descriptions.length > 0,

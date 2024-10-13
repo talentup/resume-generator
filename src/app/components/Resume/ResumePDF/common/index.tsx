@@ -4,6 +4,7 @@ import { styles, spacing } from "components/Resume/ResumePDF/styles";
 import { DEBUG_RESUME_PDF_FLAG } from "lib/constants";
 import { DEFAULT_FONT_COLOR } from "lib/redux/settingsSlice";
 
+const EXCLUDE = ['SKILLS', 'CERTIFICATIONS']
 export const ResumePDFSection = ({
   themeColor,
   heading,
@@ -24,27 +25,28 @@ export const ResumePDFSection = ({
     }}
   >
     {heading && (
-      <View style={{ ...styles.flexRow, alignItems: "center" }}>
-        {themeColor && (
+      <View style={{ ...styles.flexCol, }}>
+      
+        <Text
+          style={{
+            fontWeight: "bold",
+            letterSpacing: "0.3pt", // tracking-wide -> 0.025em * 12 pt = 0.3pt
+            color: themeColor
+          }}
+          debug={DEBUG_RESUME_PDF_FLAG}
+        >
+          {heading}
+        </Text>
+        {themeColor && !EXCLUDE.includes(heading) && (
           <View
             style={{
-              height: "3.75pt",
-              width: "30pt",
+              height: "1pt",
               backgroundColor: themeColor,
               marginRight: spacing["3.5"],
             }}
             debug={DEBUG_RESUME_PDF_FLAG}
           />
         )}
-        <Text
-          style={{
-            fontWeight: "bold",
-            letterSpacing: "0.3pt", // tracking-wide -> 0.025em * 12 pt = 0.3pt
-          }}
-          debug={DEBUG_RESUME_PDF_FLAG}
-        >
-          {heading}
-        </Text>
       </View>
     )}
     {children}
@@ -81,7 +83,7 @@ export const ResumePDFBulletList = ({
   showBulletPoints = true,
 }: {
   items: string[];
-  showBulletPoints?: boolean;
+    showBulletPoints?: boolean;
 }) => {
   return (
     <>
@@ -102,7 +104,7 @@ export const ResumePDFBulletList = ({
           {/* A breaking change was introduced causing text layout to be wider than node's width
               https://github.com/diegomura/react-pdf/issues/2182. flexGrow & flexBasis fixes it */}
           <ResumePDFText
-            style={{ lineHeight: "1.3", flexGrow: 1, flexBasis: 0 }}
+            style={{ lineHeight:"1.3", flexGrow: 1, flexBasis: 0 }}
           >
             {item}
           </ResumePDFText>

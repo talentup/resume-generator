@@ -1,4 +1,4 @@
-import { Page, View, Document } from "@react-pdf/renderer";
+import { Page, View, Document, Image } from "@react-pdf/renderer";
 import { styles, spacing } from "components/Resume/ResumePDF/styles";
 import { ResumePDFProfile } from "components/Resume/ResumePDF/ResumePDFProfile";
 import { ResumePDFWorkExperience } from "components/Resume/ResumePDF/ResumePDFWorkExperience";
@@ -11,6 +11,9 @@ import type { Settings, ShowForm } from "lib/redux/settingsSlice";
 import type { Resume } from "lib/redux/types";
 import { SuppressResumePDFErrorMessage } from "components/Resume/ResumePDF/common/SuppressResumePDFErrorMessage";
 import {LogoSvg, LogoSvgPdf} from "components/logo/Logo";
+import { ResumePDFCertification } from "./ResumePDFCertification";
+import { ResumePDFSection } from "./common";
+import BadgeSvg, { BadgeSvgPdf } from "components/badge/Badge";
 
 /**
  * Note: ResumePDF is supposed to be rendered inside PDFViewer. However,
@@ -36,7 +39,7 @@ export const ResumePDF = ({
   settings: Settings;
   isPDF?: boolean;
 }) => {
-  const { profile, workExperiences, educations, projects, skills, custom } =
+  const { profile, workExperiences, educations, projects, skills, custom, certification } =
     resume;
   const { name } = profile;
   const {
@@ -53,6 +56,24 @@ export const ResumePDF = ({
   const showFormsOrder = formsOrder.filter((form) => formToShow[form]);
 
   const formTypeToComponent: { [type in ShowForm]: () => JSX.Element } = {
+    qualifications: () => (
+      <ResumePDFSection
+        heading={formToHeading["qualifications"]}
+        themeColor={themeColor}
+      ><span></span></ResumePDFSection>
+    ),
+    skills: () => (
+      <ResumePDFSkills
+        heading={formToHeading["skills"]}
+        skills={skills}
+        themeColor={themeColor}
+        showBulletPoints={showBulletPoints["skills"]}
+      />
+    ),
+    certification: () => (
+      <ResumePDFCertification heading={formToHeading["certification"]} themeColor={themeColor} certification={certification} />
+    ),
+
     workExperiences: () => (
       <ResumePDFWorkExperience
         heading={formToHeading["workExperiences"]}
@@ -75,14 +96,7 @@ export const ResumePDF = ({
         themeColor={themeColor}
       />
     ),
-    skills: () => (
-      <ResumePDFSkills
-        heading={formToHeading["skills"]}
-        skills={skills}
-        themeColor={themeColor}
-        showBulletPoints={showBulletPoints["skills"]}
-      />
-    ),
+
     custom: () => (
       <ResumePDFCustom
         heading={formToHeading["custom"]}
@@ -104,21 +118,22 @@ export const ResumePDF = ({
             fontFamily,
             fontSize: fontSize + "pt",
           }}
-          
         >
+
           {Boolean(settings.themeColor) && (
             <View
               style={{
-                width: spacing["full"],
+                ...styles.flexRowBetween,
                 height: spacing[24],
                 padding: spacing[6],
-                paddingLeft: spacing["left"],
+                paddingLeft: spacing[10],
                 paddingBottom: spacing[0]
                 
               }}
               fixed
             >
-              {isPDF ? <LogoSvgPdf /> : <LogoSvg/>}
+              <View>{isPDF ? <LogoSvgPdf /> : <LogoSvg />}</View>
+              {Boolean(settings.brandAmbassador) && <View>{isPDF ? <BadgeSvgPdf /> : <BadgeSvg />}</View>}
           </View>
           )}
           <View
